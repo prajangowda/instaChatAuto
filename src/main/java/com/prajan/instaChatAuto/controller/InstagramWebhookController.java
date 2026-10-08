@@ -2,10 +2,16 @@ package com.prajan.instaChatAuto.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prajan.instaChatAuto.service.AiService;
 import com.prajan.instaChatAuto.service.InstagramMessageService;
+import jdk.jfr.StackTrace;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
+@Slf4j
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/webhook")
 public class InstagramWebhookController {
@@ -15,14 +21,8 @@ public class InstagramWebhookController {
 
     private final ObjectMapper objectMapper;
     private final InstagramMessageService messagingService;
+    private final AiService aiService;
 
-    public InstagramWebhookController(
-            ObjectMapper objectMapper,
-            InstagramMessageService messagingService) {
-
-        this.objectMapper = objectMapper;
-        this.messagingService = messagingService;
-    }
 
     @GetMapping
     public String verifyWebhook(
@@ -45,7 +45,7 @@ public class InstagramWebhookController {
         try {
 
             System.out.println("Instagram webhook received:");
-            System.out.println(payload);
+
 
             JsonNode root = objectMapper.readTree(payload);
 
@@ -72,19 +72,23 @@ public class InstagramWebhookController {
                 System.out.println("Sender: " + senderId);
                 System.out.println("Message: " + messageText);
 
+                String aiReply = aiService.generateReply(messageText);
+                log.info("AI Reply: " + aiReply);
                 messagingService.sendMessage(
                         senderId,
-                        "Hello! 👋 You said: " + messageText
+                        aiReply
                 );
 
             }
 
         } catch (Exception e) {
 
-            System.err.println("Error processing webhook:");
-            e.printStackTrace();
+
+            log.error("Error processing webhook:", e);
         }
 
         return "EVENT_RECEIVED";
     }
+
+
 }
