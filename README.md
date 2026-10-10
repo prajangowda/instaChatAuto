@@ -18,7 +18,7 @@ It provides backend functionality for authentication, movie management, theatre 
 ## 🌐 Live Demo
 
 - **Frontend:** [Explore CineHub](https://cinehub-app.netlify.app)
-- **Backend:** [Backend API](https://cinehub-monolith.onrender.com)
+
 
 ## 🏗️ Architecture
 
