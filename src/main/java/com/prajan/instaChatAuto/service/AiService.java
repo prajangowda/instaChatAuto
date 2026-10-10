@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-import jakarta.annotation.Resource;
+import org.springframework.core.io.Resource;
 
 @Service
 @Slf4j
