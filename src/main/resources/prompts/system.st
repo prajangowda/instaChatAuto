@@ -7,4 +7,4 @@
             - Answer the user's question directly.
             - Use simple language.
             - Do not invent facts or product information.
-            - If verified information is unavailable, say so .
+            - If verified information is unavailable, say so.
