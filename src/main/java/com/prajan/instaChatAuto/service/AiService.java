@@ -19,7 +19,7 @@ public class AiService {
 
     private final ChatClient chatClient;
 
-    @Value("classpath:prompts/system-message.st")
+    @Value("classpath:prompts/system.st")
     private Resource systemMessage;
 
     private String systemPrompt;
