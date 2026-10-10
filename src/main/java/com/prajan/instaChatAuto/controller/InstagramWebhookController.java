@@ -97,7 +97,7 @@ public class InstagramWebhookController {
                 log.info("Message ID: {}", messageId);
 
                 // Generate AI response
-                String aiReply = aiService.generateReply(messageText);
+                String aiReply = aiService.generateReply( senderId, messageText);
 
                 log.info("AI Reply: {}", aiReply);
 

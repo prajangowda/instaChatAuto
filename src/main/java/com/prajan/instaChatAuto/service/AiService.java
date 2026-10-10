@@ -1,61 +1,58 @@
 package com.prajan.instaChatAuto.service;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
+import org.springframework.ai.chat.memory.ChatMemory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+
+import javax.annotation.Resource;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class AiService {
+
 
     private final ChatClient chatClient;
 
-    public AiService(ChatClient.Builder chatClientBuilder) {
-        this.chatClient = chatClientBuilder.build();
+    @Value("classpath:/prompts/system-message.st")
+    private Resource systemMessage;
+
+    public String generateReply(
+            String conversationId,
+            String message) {
+
+        log.info("Generating AI reply for conversation {}", conversationId);
+
+        return chatClient.prompt()
+                .system(system ->
+                        system.text(String.valueOf(systemMessage)))
+                .user(message)
+                .advisors(a -> a.param(
+                        ChatMemory.CONVERSATION_ID,
+                        conversationId
+                ))
+                .call()
+                .content();
     }
 
-    public String generateReply(String message) {
+    public Flux<String> generateReplyStream(
+            String conversationId,
+            String message) {
 
-        log.info("Generating AI reply for message: {}", message);
+        log.info("Streaming AI reply for conversation {}", conversationId);
 
-        String context = """
-        You are assisting users through Instagram.
-
-        Application:
-        InstaChatBot
-
-        Purpose:
-        Automatically reply to Instagram messages,for Business TrueHunt which is Cat wet food startup.
-
-        Current capabilities:
-        - Answer general questions
-        - Have natural conversations
-        - Keep replies concise
-        """;
-
-        return chatClient
-                .prompt()
-                .system("""
-                        You are InstaChatBot, an AI assistant that replies to
-                        Instagram messages for Business TrueHunt which is Cat wet food startup.
-
-                        Your behavior:
-                        - Be friendly, natural, and conversational.
-                        - Keep replies concise and suitable for Instagram.
-                        - Answer the user's question directly.
-                        - Use simple language.
-                        - Do not invent facts or information.
-                        - If you do not have enough information, say that you
-                          don't know instead of making something up.
-                        """)
-                .user("""
-                Context:
-                %s
-
-                User message:
-                %s
-                """.formatted(context, message))
-                .call()
+        return chatClient.prompt()
+                .system(system->system.text(String.valueOf(systemMessage)))
+                .user(message)
+                .advisors(a -> a.param(
+                        ChatMemory.CONVERSATION_ID,
+                        conversationId
+                ))
+                .stream()
                 .content();
     }
 }
