@@ -5,21 +5,30 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
-import org.springframework.core.io.Resource;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 @Service
 @Slf4j
 @RequiredArgsConstructor
 public class AiService {
 
-
     private final ChatClient chatClient;
 
-    @Value("classpath:/prompts/system-message.st")
+    @Value("classpath:prompts/system-message.st")
     private Resource systemMessage;
+
+    private String systemPrompt;
+
+    @jakarta.annotation.PostConstruct
+    public void loadSystemPrompt() throws IOException {
+        this.systemPrompt =
+                systemMessage.getContentAsString(StandardCharsets.UTF_8);
+    }
 
     public String generateReply(
             String conversationId,
@@ -28,8 +37,7 @@ public class AiService {
         log.info("Generating AI reply for conversation {}", conversationId);
 
         return chatClient.prompt()
-                .system(system ->
-                        system.text(String.valueOf(systemMessage)))
+                .system(systemPrompt)
                 .user(message)
                 .advisors(a -> a.param(
                         ChatMemory.CONVERSATION_ID,
@@ -46,7 +54,7 @@ public class AiService {
         log.info("Streaming AI reply for conversation {}", conversationId);
 
         return chatClient.prompt()
-                .system(system->system.text(String.valueOf(systemMessage)))
+                .system(systemPrompt)
                 .user(message)
                 .advisors(a -> a.param(
                         ChatMemory.CONVERSATION_ID,
