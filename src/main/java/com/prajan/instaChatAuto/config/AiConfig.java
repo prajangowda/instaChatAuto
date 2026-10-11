@@ -12,9 +12,10 @@ public class AiConfig {
 
     @Bean
     public ChatMemory chatMemory() {
-        return MessageWindowChatMemory.builder()
+        ChatMemory base = MessageWindowChatMemory.builder()
                 .maxMessages(20)
                 .build();
+        return new SanitizingChatMemory(base);
     }
 
     @Bean
