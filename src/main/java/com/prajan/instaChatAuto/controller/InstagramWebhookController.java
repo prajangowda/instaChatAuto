@@ -2,6 +2,7 @@ package com.prajan.instaChatAuto.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.prajan.instaChatAuto.dto.ChatRequest;
 import com.prajan.instaChatAuto.service.AiService;
 import com.prajan.instaChatAuto.service.InstagramMessageService;
 import lombok.RequiredArgsConstructor;
@@ -117,5 +118,14 @@ public class InstagramWebhookController {
         }
 
         return "EVENT_RECEIVED";
+    }
+
+
+    @PostMapping("/testing")
+    public String testingResponse(@RequestBody ChatRequest request)
+    {
+        log.info("into the testing method "+request);
+        String aireply=aiService.generateReply(request.getConversationId(),request.getQuery());
+        return aireply;
     }
 }

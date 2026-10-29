@@ -1,0 +1,73 @@
+# MeowMart Pet Nutrition — Company and Product Guide
+
+## 1. Company Overview
+
+MeowMart Pet Nutrition is a fictional company that manufactures and sells cat food. Its product range includes kitten food, adult cat food, wet food, and senior cat food. The company aims to provide clear product information and feeding guidance to pet owners.
+
+## 2. Product: MeowMart Kitten Formula
+
+Product ID: MM-KIT-001
+
+Category: Dry cat food
+
+Target age: Kittens aged 2 to 12 months
+
+Product description: Kitten Formula is designed for growing kittens. Product selection and feeding amounts should follow the packaging instructions and the kitten's individual nutritional needs.
+
+Ingredients: Chicken meal, rice, fish oil, dried egg, vitamins, and minerals. This is fictional example data.
+
+Feeding guidance: Follow the feeding chart on the product packaging. Adjustments may be needed depending on age, weight, activity, and veterinary advice.
+
+## 3. Product: MeowMart Adult Formula
+
+Product ID: MM-ADT-001
+
+Category: Dry cat food
+
+Target age: Adult cats
+
+Product description: Adult Formula is intended for adult cats. Owners should choose the appropriate serving according to the package feeding guide and their cat's individual needs.
+
+Ingredients: Chicken, rice, fish meal, chicken fat, vitamins, and minerals. This is fictional example data.
+
+Feeding guidance: Follow the product label and ensure fresh drinking water is always available.
+
+## 4. Product: MeowMart Ocean Wet Food
+
+Product ID: MM-WET-001
+
+Category: Wet cat food
+
+Product description: Ocean Wet Food is a canned cat food product intended for cats whose nutritional requirements are met by the stated product formulation.
+
+Storage: Store unopened cans according to the label. Refrigerate unused portions promptly as directed on the packaging.
+
+Feeding guidance: Follow the feeding instructions and storage guidance printed on the can.
+
+## 5. Shipping Policy
+
+MeowMart normally processes orders within two business days. Delivery time depends on the customer's location and the shipping method selected. Customers receive tracking details after their order is dispatched.
+
+## 6. Return and Refund Policy
+
+Customers should contact MeowMart support if an order arrives damaged, incorrect, or incomplete. The customer should provide the order number and relevant photographs when available. Refund eligibility depends on the company's applicable return policy and review of the request.
+
+## 7. Frequently Asked Questions
+
+Q: Which product is intended for kittens?
+
+A: MeowMart Kitten Formula is intended for kittens aged 2 to 12 months.
+
+Q: How should I determine the correct feeding amount?
+
+A: Follow the feeding chart on the relevant product packaging and consider the cat's individual needs.
+
+Q: How long does order processing take?
+
+A: Orders are normally processed within two business days.
+
+Q: What should I do if my order arrives damaged?
+
+A: Contact customer support with your order number and photographs of the damaged item.
+
+Note: MeowMart and all product details in this document are fictional and are provided for software development and RAG testing only.
