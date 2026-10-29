@@ -44,7 +44,7 @@ public class AiService {
         // 1. Retrieve relevant chunks from Qdrant
         List<String> chunks = retrievalService.retrieveChunks(message);
 
-        log.info("*************\n {} \n**********",chunks);
+
         // 2. Build the retrieved context
         String context = chunks.isEmpty()
                 ? "No relevant information was found in the documents."
