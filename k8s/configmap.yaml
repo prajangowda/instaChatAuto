@@ -1,0 +1,23 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: instachat-config
+data:
+  SPRING_APPLICATION_NAME: "instaChatAuto"
+  PORT: "8080"
+
+  # Groq configuration
+  SPRING_AI_OPENAI_BASE_URL: "https://api.groq.com/openai/v1"
+  SPRING_AI_OPENAI_CHAT_MODEL: "openai/gpt-oss-20b"
+  SPRING_AI_OPENAI_CHAT_TEMPERATURE: "0.7"
+
+  # PostgreSQL configuration
+  DB_PORT: "5432"
+
+  # Qdrant configuration
+  QDRANT_COLLECTION: "meowmart_docs"
+  QDRANT_EMBEDDING_MODEL: "sentence-transformers/all-minilm-l6-v2"
+
+  # Spring AI chat memory
+  SPRING_AI_CHAT_MEMORY_REPOSITORY_JDBC_INITIALIZE_SCHEMA: "always"

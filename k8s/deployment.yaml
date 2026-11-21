@@ -1,0 +1,26 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: instachat-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: instachat
+  template:
+    metadata:
+      labels:
+        app: instachat
+    spec:
+      containers:
+        - name: instachat
+          image: prajangowda/jenkins:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: instachat-config
+            - secretRef:
+                name: instachat-secrets
